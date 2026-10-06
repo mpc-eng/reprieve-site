@@ -1,11 +1,24 @@
 /* ─────────────────────────────────────────────────────────────
-   Reprieve — shared styles for the legal / support pages.
+   Respite — shared styles for the legal / support pages.
    Tokens mirror apps/migraine/Reprieve/Resources/Assets.xcassets
    ("Quiet Dark" designed default + "Soft Light" alternative).
-   No external requests: no web fonts, no analytics, no cookies.
+   Display face is Fraunces (the app's "Humane" type direction),
+   self-hosted from fonts/ (OFL) — no font CDN, no analytics, no
+   cookies, no external requests.
    ───────────────────────────────────────────────────────────── */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('fonts/Fraunces72pt-Regular.ttf') format('truetype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Fraunces';
+  src: url('fonts/Fraunces72pt-SemiBold.ttf') format('truetype');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
 
 :root {
   --bg-primary:     #F4F6F7;
@@ -13,12 +26,13 @@
   --field:          #EDEFF1;
   --accent:         #2E6B7B;
   --accent-subtle:  #E1EDF0;
+  --emphasis:       #B07A2E;
   --border:         #E2E6E9;
   --text-primary:   #1A2024;
   --text-secondary: #566069;
 
   --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
-  --serif: ui-serif, 'New York', Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  --serif: 'Fraunces', ui-serif, 'New York', Georgia, 'Iowan Old Style', 'Times New Roman', serif;
   --duration: 240ms;
   --ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
@@ -30,6 +44,7 @@
     --field:          #1D2329;
     --accent:         #5FA8B8;
     --accent-subtle:  #21333A;
+    --emphasis:       #D9A85C;
     --border:         #2C343B;
     --text-primary:   #E8ECEF;
     --text-secondary: #A7B0B8;
@@ -56,7 +71,7 @@ nav {
   height: 60px; display: flex; align-items: center; justify-content: space-between;
 }
 .wordmark {
-  font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: -0.01em;
+  font-family: var(--serif); font-size: 22px; font-weight: 600; letter-spacing: -0.01em;
   color: var(--text-primary); text-decoration: none;
   display: inline-flex; align-items: center; gap: 10px;
 }
@@ -75,11 +90,11 @@ nav {
 
 .container { max-width: 760px; margin: 0 auto; padding: 56px 24px 96px; }
 
-h1 { font-family: var(--serif); font-size: clamp(30px, 4vw, 42px); font-weight: 400; letter-spacing: -0.012em; line-height: 1.14; margin-bottom: 12px; }
+h1 { font-family: var(--serif); font-size: clamp(30px, 4vw, 42px); font-weight: 600; letter-spacing: -0.012em; line-height: 1.14; margin-bottom: 12px; }
 .lede { font-size: 18px; color: var(--text-secondary); margin-bottom: 16px; }
 .updated { font-size: 14px; color: var(--text-secondary); padding-bottom: 28px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
 
-h2 { font-family: var(--serif); font-size: 24px; font-weight: 400; letter-spacing: -0.01em; margin-top: 44px; margin-bottom: 12px; }
+h2 { font-family: var(--serif); font-size: 24px; font-weight: 600; letter-spacing: -0.01em; margin-top: 44px; margin-bottom: 12px; }
 h3 { font-size: 17px; font-weight: 600; margin-top: 24px; margin-bottom: 8px; }
 p { margin-bottom: 14px; }
 ul { padding-left: 22px; margin-bottom: 16px; }

@@ -3,36 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reprieve &mdash; Your migraine record, kept private</title>
+<title>Respite &mdash; Your migraine record, kept private</title>
 <meta name="description" content="A private migraine diary for iPhone. Intensity trends, per-dose medication history and a doctor-ready PDF report &mdash; free, always, and on your device.">
 <meta name="theme-color" content="#14181C" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#F4F6F7" media="(prefers-color-scheme: light)">
-<meta property="og:title" content="Reprieve &mdash; Your migraine record, kept private">
+<meta property="og:title" content="Respite &mdash; Your migraine record, kept private">
 <meta property="og:description" content="Intensity trends, per-dose medication history and a doctor-ready PDF report &mdash; free, always, and on your device.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
 <script>document.documentElement.className += ' js';</script>
 <style>
 /* ─────────────────────────────────────────────────────────────
-   Reprieve — marketing site
+   Respite — marketing site
 
    Palette is the app's own asset catalog, unchanged
    (apps/migraine/Reprieve/Resources/Assets.xcassets): "Quiet Dark"
    is the designed default, "Soft Light" the low-glare alternative.
    Neither uses pure black or pure white — photophobia is a core
-   migraine symptom.
+   migraine symptom. Teal accent + amber emphasis are the app's own
+   brand tokens (accent / emphasis colorsets).
 
-   Display face is ui-serif → New York on Apple platforms (Apple's own
-   serif, drawn to pair with SF), Georgia elsewhere. No web font is
-   fetched: a brand whose pitch is "nothing leaves your device" should
-   not hand every visitor's IP to a font CDN.
+   Display face is Fraunces (the app's "Humane" in-app type direction):
+   a warm humanist serif at SemiBold 600 for the wordmark, headings and
+   buttons — the same role it plays in the app, tying the page to the
+   UI. Body stays SF Pro. The fonts are self-hosted (OFL, fonts/) and
+   not fetched from a CDN: a brand whose pitch is "nothing leaves your
+   device" should not hand every visitor's IP to a font host.
 
-   Structure is hairline rules and vertical rhythm, not cards. The
-   accent appears only on the line, links and one button.
+   Structure is hairline rules and vertical rhythm, not cards; shapes
+   are soft (pill buttons, rounded figures), matching the app's Humane
+   surfaces. The accent appears on the line, links and one button; the
+   brand mark's endpoint rests on an amber point, as the app icon does.
    Register: highAnxiety → restrained. Crossfades, no springs.
    ───────────────────────────────────────────────────────────── */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Fraunces 72pt optical, self-hosted static instances (OFL in fonts/).
+   Regular = 400, SemiBold = 600; no synthesis (font-synthesis: none). */
+@font-face {
+  font-family: 'Fraunces';
+  src: url('fonts/Fraunces72pt-Regular.ttf') format('truetype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Fraunces';
+  src: url('fonts/Fraunces72pt-SemiBold.ttf') format('truetype');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
 
 :root {
   /* Soft Light */
@@ -42,13 +60,14 @@
   --accent:      #2E6B7B;
   --accent-soft: #E1EDF0;
   --positive:    #3E7A52;
+  --emphasis:    #B07A2E;
   --rule:        #E2E6E9;
   --ink:         #1A2024;
   --ink-2:       #566069;
   --ink-3:       #848D95;
   --on-accent:   #FFFFFF;
 
-  --serif: ui-serif, 'New York', Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  --serif: 'Fraunces', ui-serif, 'New York', Georgia, 'Iowan Old Style', 'Times New Roman', serif;
   --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', system-ui, sans-serif;
 
   --measure: 1120px;
@@ -66,6 +85,7 @@
     --accent:      #5FA8B8;
     --accent-soft: #21333A;
     --positive:    #7FB08A;
+    --emphasis:    #D9A85C;
     --rule:        #2C343B;
     --ink:         #E8ECEF;
     --ink-2:       #A7B0B8;
@@ -100,7 +120,7 @@ a { color: inherit; text-decoration: none; }
 /* ── Type scale ───────────────────────────────────────────── */
 .display {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: -0.012em;
   text-wrap: balance;
 }
@@ -123,7 +143,7 @@ nav { border-bottom: 1px solid var(--rule); }
   height: 68px; display: flex; align-items: center; justify-content: space-between;
 }
 .mark {
-  font-family: var(--serif); font-size: 23px; letter-spacing: -0.01em;
+  font-family: var(--serif); font-weight: 600; font-size: 23px; letter-spacing: -0.01em;
   display: inline-flex; align-items: center; gap: 10px;
 }
 .mark .glyph { width: 26px; height: 14px; overflow: visible; flex: none; }
@@ -146,9 +166,9 @@ nav { border-bottom: 1px solid var(--rule); }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
-  min-height: 48px; padding: 13px 26px;
-  font-family: var(--sans); font-size: 16px; font-weight: 500;
-  border: 1px solid var(--accent); border-radius: 3px;
+  min-height: 48px; padding: 13px 30px;
+  font-family: var(--serif); font-size: 17px; font-weight: 600; letter-spacing: -0.005em;
+  border: 1px solid var(--accent); border-radius: 999px;
   background: var(--accent); color: var(--on-accent);
   transition: opacity var(--dur) var(--ease);
 }
@@ -225,7 +245,7 @@ section { padding: 84px 0; }
 .plan { padding: 0 40px; border-left: 1px solid var(--rule); }
 .plan:first-child { padding-left: 0; border-left: none; }
 .plan .eyebrow { display: block; margin-bottom: 18px; }
-.price { font-family: var(--serif); font-size: 46px; line-height: 1; letter-spacing: -0.02em; margin-bottom: 8px; }
+.price { font-family: var(--serif); font-weight: 600; font-size: 46px; line-height: 1; letter-spacing: -0.02em; margin-bottom: 8px; }
 .price .per { font-size: 19px; color: var(--ink-2); letter-spacing: 0; }
 .terms { font-size: 15px; color: var(--ink-2); margin-bottom: 26px; }
 .plan ul { list-style: none; display: grid; gap: 11px; }
@@ -241,7 +261,7 @@ section { padding: 84px 0; }
 .faq details:last-child { border-bottom: 1px solid var(--rule); }
 .faq summary {
   list-style: none; cursor: pointer; padding: 22px 0; min-height: 48px;
-  font-family: var(--serif); font-size: 20px; letter-spacing: -0.01em;
+  font-family: var(--serif); font-weight: 600; font-size: 20px; letter-spacing: -0.01em;
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
 .faq summary::-webkit-details-marker { display: none; }
@@ -296,8 +316,8 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
 <nav>
   <div class="nav-in">
     <a href="#top" class="mark">
-      <svg class="glyph" viewBox="0 0 26 14" aria-hidden="true"><path d="M1 11 C 6 11, 7 3, 11 3 C 15 3, 16 9, 20 8 L 25 5" stroke="var(--accent)" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="25" cy="5" r="1.8" fill="var(--accent)"/></svg>
-      Reprieve
+      <svg class="glyph" viewBox="0 0 26 14" aria-hidden="true"><path d="M1 11 C 6 11, 7 3, 11 3 C 15 3, 16 9, 20 8 L 25 5" stroke="var(--accent)" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="25" cy="5" r="2.2" fill="var(--emphasis)"/></svg>
+      Respite
     </a>
     <div class="nav-links">
       <a href="#free">What&rsquo;s inside</a>
@@ -321,13 +341,13 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
         </p>
         <p class="note reveal">All three are free, always. No account. Your health data never leaves your iPhone.</p>
         <div class="actions reveal">
-          <a href="mailto:hello@mpcdigital.co.uk?subject=Reprieve%20for%20iOS" class="btn">Ask about the beta</a>
+          <a href="mailto:hello@mpcdigital.co.uk?subject=Respite%20for%20iOS" class="btn">Ask about the beta</a>
           <a href="#free" class="link-quiet">See what&rsquo;s included</a>
         </div>
       </div>
 
       <figure class="shot shot-lead reveal">
-        <img src="screens/trend.png" width="716" height="1424" alt="The Reprieve trend screen: nine attacks over the last 30 days, an average intensity of 5.7 on a 1 to 10 scale, a line of the intensities recorded, and counts of attack days, average intensity and attacks not rated." loading="eager" decoding="async">
+        <img src="screens/trend.png" width="716" height="1424" alt="The Respite trend screen: nine attacks over the last 30 days, an average intensity of 5.7 on a 1 to 10 scale, a line of the intensities recorded, and counts of attack days, average intensity and attacks not rated." loading="eager" decoding="async">
       </figure>
     </div>
   </div>
@@ -350,7 +370,7 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
       </div>
       <figure class="shot shot-lead reveal">
         <img src="screens/detail.png" width="716" height="1424" loading="lazy" decoding="async"
-             alt="The Reprieve attack-detail screen: a tappable head map with the left temple selected, plus optional chips for triggers such as poor sleep and skipped meal, and symptoms such as nausea and light sensitivity.">
+             alt="The Respite attack-detail screen: a tappable head map with the left temple selected, plus optional chips for triggers such as poor sleep and skipped meal, and symptoms such as nausea and light sensitivity.">
       </figure>
     </div>
   </div>
@@ -364,7 +384,7 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
       <span class="eyebrow reveal">Free, always</span>
       <h2 class="display reveal">The three views other trackers keep behind a subscription</h2>
       <p class="reveal">
-        These are the reason Reprieve exists. They are not a trial, not a teaser and not a
+        These are the reason Respite exists. They are not a trial, not a teaser and not a
         first taste of something you have to buy &mdash; they are the free app, and they
         always will be.
       </p>
@@ -384,7 +404,7 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
         <figure class="shot"><img src="screens/medication.png" width="716" height="1424" loading="lazy" decoding="async" alt="The medication screen, listing each medication and dose with the average pain reduction recorded and the number of uses."></figure>
         <h3>Medication, dose by dose</h3>
         <p>
-          Log what you took, how much and how it went. Reprieve shows it back exactly as
+          Log what you took, how much and how it went. Respite shows it back exactly as
           you recorded it &mdash; 100&nbsp;mg and 50&nbsp;mg kept apart, with the number of
           uses each figure rests on.
         </p>
@@ -411,10 +431,10 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
     <div class="pair">
       <div>
         <div class="sec-head" style="margin-bottom:34px;">
-          <span class="eyebrow reveal">What Reprieve is</span>
+          <span class="eyebrow reveal">What Respite is</span>
           <h2 class="display reveal">A record, not an oracle</h2>
           <p class="reveal">
-            Reprieve only ever shows you what you put in. Nothing is inferred and nothing
+            Respite only ever shows you what you put in. Nothing is inferred and nothing
             is added. That is what makes it your record, rather than somebody&rsquo;s guess
             about you.
           </p>
@@ -427,16 +447,16 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
       </div>
       <div>
         <div class="sec-head" style="margin-bottom:34px;">
-          <span class="eyebrow reveal">What Reprieve is not</span>
-          <h2 class="display reveal">Things Reprieve will never&nbsp;do</h2>
+          <span class="eyebrow reveal">What Respite is not</span>
+          <h2 class="display reveal">Things Respite will never&nbsp;do</h2>
           <p class="reveal">
-            Reprieve is not a medical device, and it never guesses about your health. It
+            Respite is not a medical device, and it never guesses about your health. It
             shows you what you wrote down and leaves the reading of it to you and your
             doctor.
           </p>
         </div>
         <ul class="stack reveal">
-          <li><span class="no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span><strong>No forecasts.</strong> <span class="d">Reprieve will never tell you an attack is coming or score your risk.</span></span></li>
+          <li><span class="no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span><strong>No forecasts.</strong> <span class="d">Respite will never tell you an attack is coming or score your risk.</span></span></li>
           <li><span class="no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span><strong>No diagnosis.</strong> <span class="d">It counts what you logged. It does not name a condition or pass a verdict.</span></span></li>
           <li><span class="no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span><strong>No dosing advice.</strong> <span class="d">No calculator, no &ldquo;best medication&rdquo;, no suggestion to change what you take.</span></span></li>
           <li><span class="no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span><strong>No data sale.</strong> <span class="d">Your record is not aggregated, licensed or sold to anyone, including pharmaceutical companies.</span></span></li>
@@ -456,7 +476,7 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
       <p class="reveal">
         What you log about your migraines is some of the most private information you
         have, and the law treats it that way too. The safest way for us to look after it
-        is not to have it at all &mdash; so Reprieve has no server, no account and no sync.
+        is not to have it at all &mdash; so Respite has no server, no account and no sync.
       </p>
     </div>
     <div class="cols cols-3 reveal">
@@ -466,7 +486,7 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
       </div>
       <div class="col">
         <h3>Nothing is uploaded</h3>
-        <p>Attacks, medications, symptoms and anything Reprieve reads from the Health app stay on your phone. Exports and backups are files you make yourself &mdash; they go where you send them, and nowhere else.</p>
+        <p>Attacks, medications, symptoms and anything Respite reads from the Health app stay on your phone. Exports and backups are files you make yourself &mdash; they go where you send them, and nowhere else.</p>
       </div>
       <div class="col">
         <h3>Delete it all in one tap</h3>
@@ -475,7 +495,7 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
     </div>
     <p class="aside reveal">
       <strong>Nothing leaves your iPhone.</strong>
-      Reprieve has no analytics, no tracking and no advertising identifier &mdash; not a
+      Respite has no analytics, no tracking and no advertising identifier &mdash; not a
       single usage event is sent anywhere. There is no account, no server and no sync, so
       there is simply no copy of anything to collect. <a href="privacy.html">Read the full privacy policy</a>.
     </p>
@@ -514,11 +534,11 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
       <div class="plan">
         <span class="eyebrow">How it stays free</span>
         <p class="price" style="font-size:30px;line-height:1.2;">No data<br>for sale</p>
-        <p class="terms">The usual &ldquo;free&rdquo; trade &mdash; your data as the product &mdash; is exactly what Reprieve refuses.</p>
+        <p class="terms">The usual &ldquo;free&rdquo; trade &mdash; your data as the product &mdash; is exactly what Respite refuses.</p>
         <ul>
           <li>Your record is never aggregated, licensed or sold &mdash; not to advertisers, insurers or pharmaceutical companies</li>
           <li>There is no premium tier held back, and nothing you log is ever locked behind a payment</li>
-          <li>Reprieve is a small, deliberate app from MPC&nbsp;Digital, not a data business</li>
+          <li>Respite is a small, deliberate app from MPC&nbsp;Digital, not a data business</li>
         </ul>
       </div>
     </div>
@@ -546,10 +566,10 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
       </details>
 
       <details>
-        <summary>Can Reprieve tell me when a migraine is coming?</summary>
+        <summary>Can Respite tell me when a migraine is coming?</summary>
         <div class="answer">
           <p>
-            No, and it never will. Reprieve shows you what you have already recorded &mdash; counts,
+            No, and it never will. Respite shows you what you have already recorded &mdash; counts,
             averages and plain summaries. It does not forecast attacks, score your risk or
             interpret your data on your behalf.
           </p>
@@ -565,7 +585,7 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
         <summary>What happens to my data?</summary>
         <div class="answer">
           <p>
-            It stays on your iPhone. There is no Reprieve server, no account and no cloud
+            It stays on your iPhone. There is no Respite server, no account and no cloud
             sync, so there is no copy of your record for anyone &mdash; including us &mdash;
             to read, lose or sell.
           </p>
@@ -581,21 +601,21 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
         <summary>Can I move my logs across from another app?</summary>
         <div class="answer">
           <p>
-            Not yet. Reprieve starts clean, and your trend line begins with the first attack you
+            Not yet. Respite starts clean, and your trend line begins with the first attack you
             log. Bringing old logs across is something we are looking at &mdash; if it
             matters to you,
-            <a href="mailto:hello@mpcdigital.co.uk?subject=Reprieve%20%E2%80%94%20importing%20my%20logs">tell us</a>,
+            <a href="mailto:hello@mpcdigital.co.uk?subject=Respite%20%E2%80%94%20importing%20my%20logs">tell us</a>,
             because it helps us know how much it matters.
           </p>
         </div>
       </details>
 
       <details>
-        <summary>Does Reprieve use Apple Health?</summary>
+        <summary>Does Respite use Apple Health?</summary>
         <div class="answer">
           <p>
             Only if you turn it on, and only for the optional views that show what else you
-            had logged on your attack days. With your permission Reprieve reads Sleep and Cycle
+            had logged on your attack days. With your permission Respite reads Sleep and Cycle
             Tracking so it can show when those were recorded alongside your attacks. It
             reads on your device, writes nothing back, and uploads nothing. You can withdraw the permission in iOS Settings at any time,
             and the rest of the app carries on working exactly as before.
@@ -607,7 +627,7 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
         <summary>What do I need to run it?</summary>
         <div class="answer">
           <p>
-            An iPhone running iOS 17.4 or later. Reprieve works fully with no permissions granted
+            An iPhone running iOS 17.4 or later. Respite works fully with no permissions granted
             at all &mdash; notifications and Health access are both optional, and neither is
             requested before you have logged anything.
           </p>
@@ -615,13 +635,13 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
       </details>
 
       <details>
-        <summary>Is Reprieve available yet?</summary>
+        <summary>Is Respite available yet?</summary>
         <div class="answer">
           <p>
             Not on the App Store. The app is built and being tested ahead of submission, and
             this page will link to it the day it is live. If you would like to try the beta or
             hear when it ships,
-            <a href="mailto:hello@mpcdigital.co.uk?subject=Reprieve%20for%20iOS">get in touch</a>.
+            <a href="mailto:hello@mpcdigital.co.uk?subject=Respite%20for%20iOS">get in touch</a>.
           </p>
         </div>
       </details>
@@ -632,7 +652,7 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
 <div class="disclaimer">
   <div class="wrap">
     <p>
-      Reprieve is a personal record-keeping app. It is not a medical device and does not
+      Respite is a personal record-keeping app. It is not a medical device and does not
       provide medical advice, diagnosis or treatment. Everything it displays is a summary
       of what you entered. Always speak to a qualified healthcare professional about your
       symptoms, your medication and any decision about your care.
@@ -645,11 +665,11 @@ footer { padding: 44px 0 64px; border-top: 1px solid var(--rule); }
     <div class="foot">
       <div class="foot-brand">
         <img class="appicon" src="appicon.png" width="512" height="512" loading="lazy" decoding="async"
-             alt="The Reprieve app icon: a line-drawn head with the intensity throughline crossing at the temples, resting on an amber point.">
+             alt="The Respite app icon: a line-drawn head with the intensity throughline crossing at the temples, resting on an amber point.">
         <div>
         <span class="mark">
-          <svg class="glyph" viewBox="0 0 26 14" aria-hidden="true"><path d="M1 11 C 6 11, 7 3, 11 3 C 15 3, 16 9, 20 8 L 25 5" stroke="var(--accent)" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="25" cy="5" r="1.8" fill="var(--accent)"/></svg>
-          Reprieve
+          <svg class="glyph" viewBox="0 0 26 14" aria-hidden="true"><path d="M1 11 C 6 11, 7 3, 11 3 C 15 3, 16 9, 20 8 L 25 5" stroke="var(--accent)" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="25" cy="5" r="2.2" fill="var(--emphasis)"/></svg>
+          Respite
         </span>
         <p class="foot-tag">Your migraine record &mdash; kept private, kept by you.</p>
         </div>
